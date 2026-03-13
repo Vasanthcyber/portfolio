@@ -2,290 +2,340 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vasanth's Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="./assets/profile-pic.png" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
-    <!-- Scroll Arrows -->
-<a href="#" class="scroll-top"><i class="fas fa-arrow-up"></i></a>
-<a href="#contact" class="scroll-bottom"><i class="fas fa-arrow-down"></i></a>
-    <div class="stars"></div>
-    <div class="stars2"></div>
-    <div class="stars3"></div>
-    <header class="header">
-      <a href="#" class="logo">Portfolio</a>
-      <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="#about">About</a>
-        <a href="#skill">Skills</a>
-        <a href="#projects">projects</a>
-        <a href="#certificates">Certificates</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
- 
-    <section class="home">
-      <div class="home-content">
-        <h1>Hello Gusy, It's Me</h1>
-        <h1>Vasanth M</h1>
-        <h2>And I'm a <span class="typing-text" id="typing-text"></span></h2>
-        <p>
-          A Front-End Specialist building responsive and user-friendly web
-          designs.....
-        </p>
-      
-        <div class="social-media">
-          <a href="https://github.com/vasanthcyber-2006" target="_blank"
-            ><i class="fab fa-github"></i
-          ></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-          <a href="https://www.linkedin.com/in/vasanth-m-v2006" target="_blank"
-            ><i class="fab fa-linkedin-in"></i
-          ></a>
+    <nav id="desktop-nav">
+      <div class="logo">Vasanth</div>
+      <div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+          <li>
+            <img
+              id="modeToggle"
+              class="icon color-icon"
+              src="./assets/theme_light.png"
+              src-light="./assets/theme_light.png"
+              src-dark="./assets/theme_dark.png"
+              alt="Color Theme Icon"
+            />
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <nav id="hamburger-nav">
+      <div class="logo">Vasanth</div>
+      <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="#about" onclick="toggleMenu()">About</a></li>
+          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+          <li>
+            <img
+              id="modeToggle2"
+              class="icon color-icon"
+              src="./assets/theme_light.png"
+              src-light="./assets/theme_light.png"
+              src-dark="./assets/theme_dark.png"
+              alt="Color Theme Icon"
+            />
+          </li>
         </div>
       </div>
-      <a href="Resume.pdf" download="Resume.pdf" class="btn resume-btn">Download Resume </a>
-
-
-      <div class="home-img">
-        <div class="img-box">
-          <img src="M:\portfolio-1-main\.vscode\profile.jpg" alt="Profile" />
+    </nav>
+    <section id="profile">
+      <div class="section_pic-container">
+        <img src="./assets/profile-pic2.png" alt="Vasanth's Profile Picture" />
+      </div>
+      <div class="section_text">
+        <p class="section_text_p1">Hello, I'm</p>
+        <h1 class="title">Vasanth</h1>
+        <p class="section_text_p2">Frontend Developer</p>
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2"
+            onclick="window.open('./assets/resume.pdf')"
+          >
+            Download CV
+          </button>
+          <button class="btn btn-color-1" onclick="location.href='./#contact'">
+            Contact Info
+          </button>
+        </div>
+        <div id="social-container">
+          <img
+            src="./assets/linkedin.png"
+            src-light="./assets/linkedin_light.png"
+            src-dark="./assets/linkedin_dark.png"
+            alt="My LinkedIn Profile"
+            class="icon"
+            onclick="location.href='https://www.linkedin.com/in/vasanth-m-v2006/'"
+          />
+          <img
+            src="./assets/github.png"
+            src-light="./assets/github_light.png"
+            src-dark="./assets/github_dark.png"
+            alt="My GitHub Profile"
+            class="icon linkedin-icon"
+            onclick="location.href='https://github.com/vasanthcyber-2006'"
+          />
         </div>
       </div>
     </section>
-    <section class="about" id="about">
-      <div class="about-img">
-        <img src="M:\portfolio-1-main\.vscode\profile-pic1.png" alt="Vasanth's Profile" />
+    <section id="about">
+      <p class="section_text_p1">Get To Know More</p>
+      <h1 class="title">About Me</h1>
+      <div class="section-container">
+        <div class="section_pic-container">
+          <img
+            src="./assets/about-pic.png"
+            alt="Profile Picture"
+            class="about-pic"
+          />
+        </div>
+        <div class="about-details-container">
+          <div class="about-container">
+            <div class="details-container">
+              <img
+                src="./assets/experience.png"
+                src-light="./assets/experience_light.png"
+                src-dark="./assets/checkmark_dark.png"
+                alt="Experience Icon"
+                class="icon"
+              />
+              <h3>Experience</h3>
+              <p>Fresher <br />Frontend Developer</p>
+            </div>
+            <div class="details-container">
+              <img
+                src="./assets/education.png"
+                src-light="./assets/education_light.png"
+                src-dark="./assets/education_dark.png"
+                alt="Education Icon"
+                class="icon"
+              />
+              <h3>Education</h3>
+              <p>BCA Bachelors Degree<br /></p>
+            </div>
+          </div>
+          <div class="text-container">
+            <p>
+              Hello World, I'm Vasanth ! I'm a Web Developer from TamilNadu,
+              India. My Passion for Web Developing started when I was 12 years
+              old. I'm obessesed with making things and even more obessesed with
+              making things better. I love combining the worlds of logic and
+              creative design to make eye-catching, accessible, and
+              user-friendly websites.
+            </p>
+          </div>
+        </div>
       </div>
-
-      <div class="about-content">
-        <h2 class="heading">About <span>Me</span></h2>
-        <h3>Full Stack Developer!</h3>
-        <p>
-          Hello! I'm Vasanth M, 
-          a passionate full-stack developer with a love for creating elegant solutions to complex problems.
-          With over 1 years of experience in web development, I specialize in building modern, responsive web applications.
-
-          My approach combines technical expertise with a keen eye for design,
-          ensuring that the applications I build are not only functional but also provide an excellent user experience. 
-          I'm constantly learning new technologies and methodologies to stay at the forefront of web development.
-        </p>
-      </div>
+      <img
+        src="./assets/arrow.png"
+        src-light="./assets/arrow_light.png"
+        src-dark="./assets/arrow_dark.png"
+        alt="Arrow Icon"
+        class="icon arrow"
+        onclick="location.href='./#experience'"
+      />
     </section>
-    <h2>My Skills</h2>
-
-    <div class="skills-container" id="skill">
-      <!-- Technical Skills -->
-      <div class="column">
-        <h3>Technical Skills</h3>
-
-        <div class="skill">
-          <label
-            ><img
-              src="https://img.icons8.com/color/48/000000/html-5.png"
-              alt="HTML"
-            />
-            HTML</label
-          >
-          <div class="bar">
-            <div class="bar-fill" style="width: 90%"></div>
+    <section id="experience">
+      <p class="section_text_p1">Explore My</p>
+      <h1 class="title">Experience</h1>
+      <div class="experience-details-container">
+        <div class="about-container">
+          <div class="details-container">
+            <h2 class="experience-sub-title">Frontend Development</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>HTML</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>CSS</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>JavaScript</h3>
+                  <p>Beginner</p>
+                </div>
+              </article>
+            </div>
           </div>
-          <div class="percent-label">90%</div>
-        </div>
-
-        <div class="skill">
-          <label
-            ><img
-              src="https://img.icons8.com/color/48/000000/css3.png"
-              alt="CSS"
-            />
-            CSS</label
-          >
-          <div class="bar">
-            <div class="bar-fill" style="width: 60%"></div>
-          </div>
-          <div class="percent-label">60%</div>
-        </div>
-
-        <div class="skill">
-          <label
-            ><img
-              src="https://img.icons8.com/color/48/000000/javascript--v1.png"
-              alt="JavaScript"
-            />
-            JavaScript</label
-          >
-          <div class="bar">
-            <div class="bar-fill" style="width: 85%"></div>
-          </div>
-          <div class="percent-label">85%</div>
-        </div>
-
-        <div class="skill">
-          <label
-            ><img
-              src="https://img.icons8.com/color/48/angularjs.png"
-              alt="Angular"
-            />
-            Angular</label
-          >
-          <div class="bar">
-            <div class="bar-fill" style="width: 80%"></div>
-          </div>
-          <div class="percent-label">80%</div>
-        </div>
-
-        <div class="skill">
-          <label
-            ><img
-              src="https://img.icons8.com/offices/30/react.png"
-              alt="React"
-            />
-            React JS</label
-          >
-          <div class="bar">
-            <div class="bar-fill" style="width: 40%"></div>
-          </div>
-          <div class="percent-label">40%</div>
-        </div>
-      </div>
-
-      <!-- Professional Skills -->
-      <div class="column">
-        <h3>Professional Skills</h3>
-        <div class="circle-container">
-          <div class="circle-skill">
-            <div class="circle" style="--angle: 324deg"><span>90%</span></div>
-            <div class="label">Creativity</div>
-          </div>
-
-          <div class="circle-skill">
-            <div class="circle" style="--angle: 234deg"><span>65%</span></div>
-            <div class="label">Communication</div>
-          </div>
-
-          <div class="circle-skill">
-            <div class="circle" style="--angle: 270deg"><span>75%</span></div>
-            <div class="label">Problem Solving</div>
-          </div>
-
-          <div class="circle-skill">
-            <div class="circle" style="--angle: 306deg"><span>85%</span></div>
-            <div class="label">Teamwork</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section id="certificates">
-      <div class="certificates-container">
-        <h2>My Certificates</h2>
-        <div class="certificates-grid">
-          <div class="certificate-card">
-            <h3>Full-Stack Development</h3>
-            <p>
-              Completed certification in full-stack web development covering
-              HTML, CSS, JavaScript, React, Node.js, and databases.
-            </p>
-          <div class="certificate-card">
-            <h3>Computer Graphics</h3>
-            <p>
-              Learned graphic rendering techniques, 2D/3D transformations, and
-              practical implementation using OpenGL.
-            </p>
-          </div>
-
-          <div class="certificate-card">
-            <h3>AI Tools</h3>
-            <p>
-              Certified in basic AI tools and workflows like ChatGPT, image
-              generators, and prompt engineering.
-            </p>
-          </div>
-
-          <div class="certificate-card">
-            <h3>Multimedia Tools</h3>
-            <p>
-              Gained skills in photo/video editing software including Photoshop,
-              Canva, and Filmora.
-            </p>
-          </div>
-
-          <div class="certificate-card">
-            <h3>Data Science</h3>
-            <p>
-              Completed a foundational course in data science, Python, data
-              visualization, and statistics.
-            </p>
-            <a
+          <div class="details-container">
+            <h2 class="experience-sub-title">Backend Development</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>SQL</h3>
+                  <p>Beginner</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Node JS</h3>
+                  <p>Beginner</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Python</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Git</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </div>
+      <img
+        src="./assets/arrow.png"
+        src-light="./assets/arrow_light.png"
+        src-dark="./assets/arrow_dark.png"
+        alt="Arrow Icon"
+        class="icon arrow"
+        onclick="location.href='./#projects'"
+      />
     </section>
-    <!-- Contact Section -->
+    <section id="projects">
+      <p class="section_text_p1">Browse My Recent</p>
+      <h1 class="title">Projects</h1>
+      <div class="experience-details-container">
+        <div class="about-container">
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="./assets/1.png" alt="Project 1" class="project-img" />
+            </div>
+      <img
+        src="./assets/arrow.png"
+        src-light="./assets/arrow_light.png"
+        src-dark="./assets/arrow_dark.png"
+        alt="Arrow Icon"
+        class="icon arrow"
+        onclick="location.href='./#contact'"
+      />
+    </section>
     <section id="contact">
-      <div class="contact-container">
-        <h2>Get in Touch</h2>
-        <p>
-          Fill out the form below and I’ll get back to you as soon as possible.
-        </p>
-        <p>Feel free to message me or connect via social platforms....</p>
-        <form
-          action="https://formsubmit.co/mmvasanth1980@gmail.com" method="POST">
-          <div class="form-group">
-            <label for="name">Name</label><br />
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your name"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email</label><br />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Your email"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="message">Message</label><br />
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              placeholder="Your message"
-              required
-            ></textarea>
-          </div>
-
-          <button type="submit">Send Message ✈</button>
-        </form>
-
-        <div class="social-links">
-          <p>Or connect via:</p>
-          <a href="mmvasanth1980@gmai.com">📧 Email</a> |
-          <a href="https://www.linkedin.com/in/vasanth-m-v2006" target="_blank"
-            >🔗 LinkedIn</a
-          >
-          |
-          <a href="https://github.com/vasanthcyber-2006" target="_blank"
-            >💻 GitHub</a
-          >
+      <p class="section_text_p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img
+            src="./assets/email.png"
+            src-light="./assets/email_light.png"
+            src-dark="./assets/email_dark.png"
+            alt="Email Icon"
+            class="icon contact-icon email-icon"
+          />
+          <p>
+            <a href="mailto:mmvasanth1980@gmail.com">mmvasanth1980@gmail.com</a>
+          </p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/linkedin.png"
+            src-light="./assets/linkedin_light.png"
+            src-dark="./assets/linkedin_dark.png"
+            alt="My LinkedIn Profile"
+            class="icon"
+            onclick="location.href='https://www.linkedin.com/in/vasanth-m-v2006/'"
+          />
+          <p>
+            <a href="https://www.linkedin.com/in/vasanth-m-v2006/"
+              >Vasanth</a
+            >
+          </p>
         </div>
       </div>
     </section>
-   <!-- JavaScript for typing text -->
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; 2026 Vasanth. All Rights Reserved</p>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>

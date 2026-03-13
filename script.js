@@ -1,29 +1,53 @@
-const typingText = document.getElementById("typing-text");
-const phrases = ["Frontend Developer", "Web Designer", "Backend Developer"];
-let index = 0;
-let charIndex = 0;
-let currentPhrase = "";
-let isDeleting = false;
-
-function type() {
-  currentPhrase = phrases[index];
-
-  if (isDeleting) {
-    typingText.textContent = currentPhrase.substring(0, charIndex--);
-  } else {
-    typingText.textContent = currentPhrase.substring(0, charIndex++);
-  }
-
-  if (!isDeleting && charIndex === currentPhrase.length) {
-    isDeleting = true;
-    setTimeout(type, 1000);
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    index = (index + 1) % phrases.length;
-    setTimeout(type, 200);
-  } else {
-    setTimeout(type, isDeleting ? 80 : 120);
-  }
+function toggleMenu() {
+  const menu = document.querySelector(".menu-links");
+  const icon = document.querySelector(".hamburger-icon");
+  menu.classList.toggle("open");
+  icon.classList.toggle("open");
 }
 
-type();
+// Dark / Light Mode
+
+const btn = document.getElementById("modeToggle");
+const btn2 = document.getElementById("modeToggle2");
+const themeIcons = document.querySelectorAll(".icon");
+const currentTheme = localStorage.getItem("theme");
+
+if (currentTheme === "dark") {
+  setDarkMode();
+}
+
+btn.addEventListener("click", function () {
+  setTheme();
+});
+
+btn2.addEventListener("click", function () {
+  setTheme();
+});
+
+function setTheme() {
+  let currentTheme = document.body.getAttribute("theme");
+
+  if (currentTheme === "dark") {
+    setLightMode();
+  } else {
+    setDarkMode();
+  }
+}
+
+function setDarkMode() {
+  document.body.setAttribute("theme", "dark");
+  localStorage.setItem("theme", "dark");
+
+  themeIcons.forEach((icon) => {
+    icon.src = icon.getAttribute("src-dark");
+  });
+}
+
+function setLightMode() {
+  document.body.removeAttribute("theme");
+  localStorage.setItem("theme", "light");
+
+  themeIcons.forEach((icon) => {
+    icon.src = icon.getAttribute("src-light");
+  });
+}

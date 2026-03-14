@@ -1,341 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vasanth's Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="./assets/profile-pic.png" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-  </head>
-  <body>
-    <nav id="desktop-nav">
-      <div class="logo">Vasanth</div>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vasanth — Frontend Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:      #050810;
+      --navy:    #080d1a;
+      --g1:      #00ffa3;
+      --g2:      #0066ff;
+      --g3:      #7b2fff;
+      --text:    #e2e8f8;
+      --sub:     #8892aa;
+      --glass:   rgba(255,255,255,0.04);
+      --gborder: rgba(255,255,255,0.09);
+    }
+ 
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+ 
+    /* AURORA */
+    .aurora {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); opacity: 0.17;
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+    .b1 { width:600px; height:600px; background:var(--g1); top:-150px; left:-100px; }
+    .b2 { width:500px; height:500px; background:var(--g2); top:35%; right:-120px; animation-duration:26s; animation-delay:-9s; }
+    .b3 { width:380px; height:380px; background:var(--g3); bottom:-60px; left:28%; animation-duration:23s; animation-delay:-5s; }
+    @keyframes drift {
+      from { transform:translate(0,0) scale(1); }
+      to   { transform:translate(50px,35px) scale(1.08); }
+    }
+ 
+    /* NAV */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 7%;
+      transition: background .35s;
+    }
+    nav.stuck {
+      background:rgba(5,8,16,.85);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--gborder);
+    }
+    .logo {
+      font-family:'Syne',sans-serif; font-weight:800; font-size:22px;
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .nav-list { list-style:none; display:flex; gap:32px; }
+    .nav-list a {
+      font-size:13px; letter-spacing:.5px; color:var(--sub);
+      text-decoration:none; transition:color .2s;
+    }
+    .nav-list a:hover { color:var(--text); }
+ 
+    /* burger */
+    .burger { display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:300; }
+    .burger span { width:22px; height:1.5px; background:var(--text); display:block; transition:.3s; }
+    .burger.open span:nth-child(1) { transform:rotate(45deg) translate(4px,4px); }
+    .burger.open span:nth-child(2) { opacity:0; }
+    .burger.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-4px); }
+ 
+    .drawer {
+      display:none; position:fixed; inset:0; z-index:250;
+      background:rgba(5,8,16,.97); backdrop-filter:blur(24px);
+      flex-direction:column; align-items:center; justify-content:center; gap:40px;
+    }
+    .drawer.open { display:flex; }
+    .drawer a {
+      font-family:'Syne',sans-serif; font-size:40px; font-weight:700;
+      color:var(--text); text-decoration:none; transition:color .2s;
+    }
+    .drawer a:hover { color:var(--g1); }
+ 
+    /* GLASS */
+    .glass {
+      background:var(--glass);
+      border:1px solid var(--gborder);
+      border-radius:16px;
+      backdrop-filter:blur(12px);
+      transition:border-color .3s, transform .3s, box-shadow .3s;
+    }
+    .glass:hover {
+      border-color:rgba(0,255,163,.28);
+      transform:translateY(-4px);
+      box-shadow:0 20px 56px rgba(0,102,255,.12);
+    }
+ 
+    .grad { background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+ 
+    /* SECTION */
+    section { position:relative; z-index:10; padding:110px 7%; }
+ 
+    .tag {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:11px; font-weight:500; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--g1); margin-bottom:14px;
+    }
+    .tag::before { content:''; width:20px; height:1px; background:linear-gradient(90deg,var(--g1),var(--g2)); }
+ 
+    .big-title {
+      font-family:'Syne',sans-serif; font-weight:800;
+      font-size:clamp(52px,8vw,94px); line-height:.97;
+      letter-spacing:-1px; color:var(--text); margin-bottom:56px;
+    }
+ 
+    /* HERO */
+    #profile {
+      min-height:100vh;
+      display:grid; grid-template-columns:1fr auto;
+      align-items:center; gap:60px;
+      padding-top:100px;
+    }
+ 
+    .grid-lines {
+      position:absolute; inset:0; z-index:1; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:60px 60px;
+      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+    }
+ 
+    .hero-text { position:relative; z-index:5; }
+ 
+    .hero-greeting {
+      font-size:14px; letter-spacing:3px; text-transform:uppercase;
+      color:var(--sub); margin-bottom:14px;
+      opacity:0; animation:up .6s .15s forwards;
+    }
+    .hero-name {
+      font-family:'Syne',sans-serif; font-weight:800;
+      font-size:clamp(64px,9vw,108px); line-height:.95;
+      letter-spacing:-2px; margin-bottom:14px;
+      opacity:0; animation:up .7s .3s forwards;
+    }
+    .hero-role {
+      font-size:18px; color:var(--sub); margin-bottom:26px;
+      opacity:0; animation:up .7s .45s forwards;
+    }
+    .hero-desc {
+      max-width:500px; font-size:15px; line-height:1.85;
+      color:#66708a; margin-bottom:38px;
+      opacity:0; animation:up .7s .6s forwards;
+    }
+    .hero-btns {
+      display:flex; gap:14px; flex-wrap:wrap;
+      opacity:0; animation:up .7s .75s forwards;
+    }
+    .btn-glow {
+      padding:13px 30px;
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      color:#050810;
+      font-family:'Outfit',sans-serif; font-size:13px; font-weight:500;
+      border:none; border-radius:50px;
+      cursor:pointer; text-decoration:none;
+      transition:box-shadow .3s, transform .2s;
+    }
+    .btn-glow:hover { box-shadow:0 0 28px rgba(0,255,163,.4),0 0 56px rgba(0,102,255,.18); transform:translateY(-2px); }
+    .btn-ghost {
+      padding:12px 30px;
+      background:transparent; color:var(--text);
+      font-family:'Outfit',sans-serif; font-size:13px;
+      border:1px solid var(--gborder); border-radius:50px;
+      cursor:pointer; text-decoration:none;
+      transition:border-color .25s, color .25s, transform .2s;
+    }
+    .btn-ghost:hover { border-color:var(--g1); color:var(--g1); transform:translateY(-2px); }
+ 
+    .hero-social {
+      display:flex; gap:14px; margin-top:34px;
+      opacity:0; animation:up .7s .9s forwards;
+    }
+    .hero-social a {
+      width:40px; height:40px; border:1px solid var(--gborder); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:13px; color:var(--sub); text-decoration:none;
+      transition:border-color .25s, color .25s, box-shadow .25s;
+    }
+    .hero-social a:hover { border-color:var(--g1); color:var(--g1); box-shadow:0 0 16px rgba(0,255,163,.2); }
+ 
+    .hero-img-wrap {
+      position:relative; z-index:5; flex-shrink:0;
+      width:clamp(200px,22vw,290px);
+      opacity:0; animation:scaleIn .9s .4s forwards;
+    }
+    .hero-img-wrap::before {
+      content:''; position:absolute; inset:-2px; border-radius:24px;
+      background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+      z-index:-1; animation:hue 6s linear infinite;
+    }
+    @keyframes hue { to { filter:hue-rotate(360deg); } }
+    .hero-img-wrap img { width:100%; border-radius:22px; display:block; }
+    .img-ph {
+      width:100%; aspect-ratio:3/4; border-radius:22px;
+      background:linear-gradient(135deg,#0d1425,#111827);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Syne',sans-serif; font-size:64px; font-weight:800;
+    }
+    .hero-badge {
+      position:absolute; bottom:-14px; left:-18px;
+      padding:12px 18px; border-radius:12px; font-size:12px;
+      color:var(--sub);
+    }
+    .hero-badge strong { display:block; font-size:22px; font-family:'Syne',sans-serif; color:var(--g1); }
+ 
+    /* ABOUT */
+    #about { background:rgba(8,13,26,.5); }
+    .about-grid { display:grid; grid-template-columns:260px 1fr; gap:64px; align-items:start; }
+    .about-pic { position:relative; }
+    .about-pic img { width:100%; border-radius:16px; border:1px solid var(--gborder); }
+    .about-pic::after {
+      content:''; position:absolute; inset:14px -14px -14px 14px;
+      border:1px solid rgba(0,255,163,.15); border-radius:16px; z-index:-1;
+    }
+    .stat-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; }
+    .stat-card { padding:20px; border-radius:12px; }
+    .stat-card .ic { font-size:22px; margin-bottom:8px; }
+    .stat-card h4 { font-family:'Syne',sans-serif; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--g1); margin-bottom:4px; }
+    .stat-card p { font-size:13px; color:var(--sub); line-height:1.5; }
+    .bio { font-size:15px; color:#70798e; line-height:1.9; }
+    .bio b { color:var(--text); font-weight:500; }
+ 
+    /* EXPERIENCE */
+    .exp-grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+    .exp-card { padding:32px; border-radius:16px; }
+    .exp-head {
+      font-family:'Syne',sans-serif; font-weight:700; font-size:19px;
+      margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--gborder);
+      display:flex; align-items:center; gap:10px;
+    }
+    .sk-row { display:flex; align-items:center; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,.04); }
+    .sk-row:last-child { border-bottom:none; }
+    .sk-name { font-size:14px; color:var(--text); }
+    .pill { font-size:10px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:4px 12px; border-radius:50px; }
+    .p-pro { background:rgba(0,255,163,.1); color:var(--g1); border:1px solid rgba(0,255,163,.25); }
+    .p-mid { background:rgba(0,102,255,.1); color:#6fb3ff; border:1px solid rgba(0,102,255,.25); }
+    .p-new { background:rgba(255,255,255,.05); color:var(--sub); border:1px solid var(--gborder); }
+ 
+    /* PROJECTS */
+    #projects { background:rgba(8,13,26,.5); }
+    .proj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:22px; }
+    .proj-card { border-radius:16px; overflow:hidden; cursor:pointer; }
+    .proj-thumb {
+      width:100%; min-height:155px;
+      background:linear-gradient(135deg,#0a1628,#0f2040);
+      display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+    }
+    .proj-thumb img { width:100%; height:100%; object-fit:cover; }
+    .pnum {
+      font-family:'Syne',sans-serif; font-size:54px; font-weight:800;
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; opacity:.12;
+    }
+    .proj-glow { position:absolute; inset:0; background:radial-gradient(ellipse at center,rgba(0,255,163,.05),transparent 70%); }
+    .proj-body { padding:22px; }
+    .proj-tag-label { font-size:10px; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:var(--g1); margin-bottom:7px; }
+    .proj-body h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:19px; color:var(--text); margin-bottom:7px; }
+    .proj-body p { font-size:13px; color:var(--sub); line-height:1.7; margin-bottom:14px; }
+    .t-pills { display:flex; gap:6px; flex-wrap:wrap; }
+    .t-pill { font-size:10px; letter-spacing:1px; text-transform:uppercase; padding:3px 9px; border-radius:4px; background:rgba(255,255,255,.05); color:var(--sub); border:1px solid var(--gborder); }
+ 
+    /* CONTACT */
+    .contact-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:72px; align-items:start; }
+    .contact-left > .big-title { font-size:clamp(42px,5vw,66px); margin-bottom:18px; }
+    .contact-left > .sub-p { font-size:14px; color:var(--sub); line-height:1.8; margin-bottom:32px; }
+    .c-link {
+      display:flex; align-items:center; gap:16px; padding:15px 0;
+      border-bottom:1px solid var(--gborder); text-decoration:none;
+      transition:padding-left .25s;
+    }
+    .c-link:last-child { border-bottom:none; }
+    .c-link:hover { padding-left:8px; }
+    .c-icon {
+      width:42px; height:42px; border-radius:11px;
+      background:var(--glass); border:1px solid var(--gborder);
+      display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0;
+      transition:background .25s, border-color .25s;
+    }
+    .c-link:hover .c-icon { background:rgba(0,255,163,.08); border-color:rgba(0,255,163,.3); }
+    .c-info span { display:block; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--g1); margin-bottom:2px; }
+    .c-info p { font-size:14px; color:var(--text); }
+ 
+    .c-form { display:flex; flex-direction:column; gap:16px; }
+    .f-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .f-g { display:flex; flex-direction:column; gap:6px; }
+    .f-g label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--sub); }
+    .f-g input, .f-g textarea {
+      background:rgba(255,255,255,.03); border:1px solid var(--gborder);
+      border-radius:10px; padding:13px 16px;
+      color:var(--text); font-family:'Outfit',sans-serif; font-size:14px; outline:none;
+      transition:border-color .25s, box-shadow .25s;
+    }
+    .f-g input:focus, .f-g textarea:focus { border-color:rgba(0,255,163,.4); box-shadow:0 0 18px rgba(0,255,163,.07); }
+    .f-g input::placeholder, .f-g textarea::placeholder { color:#2e3848; }
+    .f-g textarea { min-height:128px; resize:vertical; }
+    .btn-send {
+      padding:14px 32px;
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      color:#050810; font-family:'Outfit',sans-serif; font-size:13px; font-weight:500;
+      border:none; border-radius:50px; cursor:pointer;
+      transition:box-shadow .3s, transform .2s;
+    }
+    .btn-send:hover { box-shadow:0 0 30px rgba(0,255,163,.35); transform:translateY(-2px); }
+ 
+    /* FOOTER */
+    footer {
+      position:relative; z-index:10;
+      border-top:1px solid var(--gborder);
+      padding:30px 7%;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+      background:rgba(5,8,16,.6);
+    }
+    .foot-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:18px; }
+    .foot-nav { list-style:none; display:flex; gap:24px; }
+    .foot-nav a { font-size:12px; color:var(--sub); text-decoration:none; transition:color .2s; }
+    .foot-nav a:hover { color:var(--g1); }
+    footer small { font-size:12px; color:#2e3848; }
+ 
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity .8s, transform .8s; }
+    .reveal.on { opacity:1; transform:translateY(0); }
+ 
+    @keyframes up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes scaleIn { from{opacity:0;transform:scale(.93)} to{opacity:1;transform:scale(1)} }
+ 
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      #profile{grid-template-columns:1fr}
+      .hero-img-wrap{display:none}
+      .about-grid{grid-template-columns:1fr}
+      .about-pic{max-width:240px}
+      .exp-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .f-row{grid-template-columns:1fr}
+    }
+    @media(max-width:640px){
+      .nav-list{display:none}
+      .burger{display:flex}
+      section{padding:90px 5%}
+      footer{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+ 
+  <div class="aurora">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+ 
+  <div class="drawer" id="drawer">
+    <a href="#about"      onclick="cd()">About</a>
+    <a href="#experience" onclick="cd()">Experience</a>
+    <a href="#projects"   onclick="cd()">Projects</a>
+    <a href="#contact"    onclick="cd()">Contact</a>
+  </div>
+ 
+  <nav id="nav">
+    <div class="logo">VM</div>
+    <ul class="nav-list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="burger" id="brg" onclick="td()"><span></span><span></span><span></span></div>
+  </nav>
+ 
+  <!-- HERO -->
+  <section id="profile">
+    <div class="grid-lines"></div>
+    <div class="hero-text">
+      <p class="hero-greeting">Hello, I'm</p>
+      <h1 class="hero-name"><span class="grad">Vasanth</span></h1>
+      <p class="hero-role">Frontend Developer</p>
+      <p class="hero-desc">A web developer from Tamil Nadu, India, passionate about crafting eye-catching, accessible, and user-friendly websites — blending logic with creative design since age 12.</p>
+      <div class="hero-btns">
+        <a href="./assets/resume.pdf" class="btn-glow" download>Download CV</a>
+        <a href="#contact" class="btn-ghost">Contact Info</a>
+      </div>
+      <div class="hero-social">
+        <a href="https://www.linkedin.com/in/vasanth-m-v2006/" target="_blank">in</a>
+        <a href="https://github.com/vasanthcyber-2006" target="_blank">gh</a>
+        <a href="mailto:mmvasanth1980@gmail.com">@</a>
+      </div>
+    </div>
+ 
+    <div class="hero-img-wrap">
+      <img src="./assets/profile-pic2.png" alt="Vasanth"
+           onerror="this.style.display='none';document.querySelector('.img-ph').style.display='flex'"/>
+      <div class="img-ph" style="display:none"><span class="grad">VM</span></div>
+      <div class="hero-badge glass">
+        <strong>1+</strong>
+        Year Exp.
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="tag">Get to know more</div>
+    <h2 class="big-title">About <span class="grad">Me</span></h2>
+    <div class="about-grid reveal">
+      <div class="about-pic">
+        <img src="./assets/about-pic.png" alt="Vasanth"
+             onerror="this.src='https://ui-avatars.com/api/?name=VM&size=400&background=0d1425&color=00ffa3&bold=true'"/>
+      </div>
       <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li>
-          <li>
-            <img
-              id="modeToggle"
-              class="icon color-icon"
-              src="./assets/theme_light.png"
-              src-light="./assets/theme_light.png"
-              src-dark="./assets/theme_dark.png"
-              alt="Color Theme Icon"
-            />
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">Vasanth</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-          <li>
-            <img
-              id="modeToggle2"
-              class="icon color-icon"
-              src="./assets/theme_light.png"
-              src-light="./assets/theme_light.png"
-              src-dark="./assets/theme_dark.png"
-              alt="Color Theme Icon"
-            />
-          </li>
-        </div>
-      </div>
-    </nav>
-    <section id="profile">
-      <div class="section_pic-container">
-        <img src="./assets/profile-pic2.png" alt="Vasanth's Profile Picture" />
-      </div>
-      <div class="section_text">
-        <p class="section_text_p1">Hello, I'm</p>
-        <h1 class="title">Vasanth</h1>
-        <p class="section_text_p2">Frontend Developer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/resume.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="social-container">
-          <img
-            src="./assets/linkedin.png"
-            src-light="./assets/linkedin_light.png"
-            src-dark="./assets/linkedin_dark.png"
-            alt="My LinkedIn Profile"
-            class="icon"
-            onclick="location.href='https://www.linkedin.com/in/vasanth-m-v2006/'"
-          />
-          <img
-            src="./assets/github.png"
-            src-light="./assets/github_light.png"
-            src-dark="./assets/github_dark.png"
-            alt="My GitHub Profile"
-            class="icon linkedin-icon"
-            onclick="location.href='https://github.com/vasanthcyber-2006'"
-          />
-        </div>
-      </div>
-    </section>
-    <section id="about">
-      <p class="section_text_p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section_pic-container">
-          <img
-            src="./assets/about-pic.png"
-            alt="Profile Picture"
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-container">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                src-light="./assets/experience_light.png"
-                src-dark="./assets/checkmark_dark.png"
-                alt="Experience Icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <p>Fresher <br />Frontend Developer</p>
-            </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                src-light="./assets/education_light.png"
-                src-dark="./assets/education_dark.png"
-                alt="Education Icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <p>BCA Bachelors Degree<br /></p>
-            </div>
+        <div class="stat-row">
+          <div class="stat-card glass">
+            <div class="ic">⚡</div>
+            <h4>Experience</h4>
+            <p>Fresher<br/>Frontend Developer</p>
           </div>
-          <div class="text-container">
-            <p>
-              Hello World, I'm Vasanth ! I'm a Web Developer from TamilNadu,
-              India. My Passion for Web Developing started when I was 12 years
-              old. I'm obessesed with making things and even more obessesed with
-              making things better. I love combining the worlds of logic and
-              creative design to make eye-catching, accessible, and
-              user-friendly websites.
-            </p>
+          <div class="stat-card glass">
+            <div class="ic">🎓</div>
+            <h4>Education</h4>
+            <p>BCA<br/>Bachelor's Degree</p>
+          </div>
+        </div>
+        <p class="bio">Hello World, I'm <b>Vasanth</b>! A Web Developer from <b>Tamil Nadu, India</b>. My passion for web development started when I was <b>12 years old</b>. I'm obsessed with making things — and even more obsessed with making things <b>better</b>. I love combining the worlds of logic and creative design to craft eye-catching, accessible, and user-friendly websites.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="tag">Explore my</div>
+    <h2 class="big-title">Experi<span class="grad">ence</span></h2>
+    <div class="exp-grid reveal">
+      <div class="exp-card glass">
+        <div class="exp-head"><span>🖥</span> Frontend Dev</div>
+        <div class="sk-row"><span class="sk-name">HTML</span><span class="pill p-pro">Experienced</span></div>
+        <div class="sk-row"><span class="sk-name">CSS</span><span class="pill p-mid">Intermediate</span></div>
+        <div class="sk-row"><span class="sk-name">JavaScript</span><span class="pill p-new">Beginner</span></div>
+      </div>
+      <div class="exp-card glass">
+        <div class="exp-head"><span>⚙️</span> Backend Dev</div>
+        <div class="sk-row"><span class="sk-name">SQL</span><span class="pill p-new">Beginner</span></div>
+        <div class="sk-row"><span class="sk-name">Node JS</span><span class="pill p-new">Beginner</span></div>
+        <div class="sk-row"><span class="sk-name">Python</span><span class="pill p-mid">Intermediate</span></div>
+        <div class="sk-row"><span class="sk-name">Git</span><span class="pill p-mid">Intermediate</span></div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="tag">Browse my recent</div>
+    <h2 class="big-title">Pro<span class="grad">jects</span></h2>
+    <div class="proj-grid reveal">
+      <div class="proj-card glass">
+        <div class="proj-thumb">
+          <img src="./assets/1.png" alt="Project 1" onerror="this.style.display='none'"/>
+          <div class="pnum">01</div>
+          <div class="proj-glow"></div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tag-label">Project — 01</div>
+          <h3>Portfolio Website</h3>
+          <p>Personal portfolio showcasing skills and experience with a modern glassmorphism dark theme and aurora effects.</p>
+          <div class="t-pills">
+            <span class="t-pill">HTML</span>
+            <span class="t-pill">CSS</span>
+            <span class="t-pill">JavaScript</span>
           </div>
         </div>
       </div>
-      <img
-        src="./assets/arrow.png"
-        src-light="./assets/arrow_light.png"
-        src-dark="./assets/arrow_dark.png"
-        alt="Arrow Icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
-    </section>
-    <section id="experience">
-      <p class="section_text_p1">Explore My</p>
-      <h1 class="title">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-container">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  src-light="./assets/checkmark_light.png"
-                  src-dark="./assets/checkmark_dark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>HTML</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  src-light="./assets/checkmark_light.png"
-                  src-dark="./assets/checkmark_dark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>CSS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  src-light="./assets/checkmark_light.png"
-                  src-dark="./assets/checkmark_dark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Beginner</p>
-                </div>
-              </article>
-            </div>
-          </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Backend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  src-light="./assets/checkmark_light.png"
-                  src-dark="./assets/checkmark_dark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>SQL</h3>
-                  <p>Beginner</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  src-light="./assets/checkmark_light.png"
-                  src-dark="./assets/checkmark_dark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Node JS</h3>
-                  <p>Beginner</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  src-light="./assets/checkmark_light.png"
-                  src-dark="./assets/checkmark_dark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Python</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  src-light="./assets/checkmark_light.png"
-                  src-dark="./assets/checkmark_dark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Git</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
+    </div>
+  </section>
+ 
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="tag">Get in touch</div>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <h2 class="big-title">Let's<br/><span class="grad">Connect</span></h2>
+        <p class="sub-p">Have a project or idea? Let's build something great together.</p>
+        <a class="c-link" href="mailto:mmvasanth1980@gmail.com">
+          <div class="c-icon">✉</div>
+          <div class="c-info"><span>Email</span><p>mmvasanth1980@gmail.com</p></div>
+        </a>
+        <a class="c-link" href="https://www.linkedin.com/in/vasanth-m-v2006/" target="_blank">
+          <div class="c-icon">in</div>
+          <div class="c-info"><span>LinkedIn</span><p>vasanth-m-v2006</p></div>
+        </a>
+        <a class="c-link" href="https://github.com/vasanthcyber-2006" target="_blank">
+          <div class="c-icon">gh</div>
+          <div class="c-info"><span>GitHub</span><p>vasanthcyber-2006</p></div>
+        </a>
       </div>
-      <img
-        src="./assets/arrow.png"
-        src-light="./assets/arrow_light.png"
-        src-dark="./assets/arrow_dark.png"
-        alt="Arrow Icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      />
-    </section>
-    <section id="projects">
-      <p class="section_text_p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-container">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img src="./assets/1.png" alt="Project 1" class="project-img" />
-            </div>
-      <img
-        src="./assets/arrow.png"
-        src-light="./assets/arrow_light.png"
-        src-dark="./assets/arrow_dark.png"
-        alt="Arrow Icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      />
-    </section>
-    <section id="contact">
-      <p class="section_text_p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            src-light="./assets/email_light.png"
-            src-dark="./assets/email_dark.png"
-            alt="Email Icon"
-            class="icon contact-icon email-icon"
-          />
-          <p>
-            <a href="mailto:mmvasanth1980@gmail.com">mmvasanth1980@gmail.com</a>
-          </p>
+      <form class="c-form reveal" onsubmit="sf(event)">
+        <div class="f-row">
+          <div class="f-g"><label>Name</label><input type="text" placeholder="Your name" required/></div>
+          <div class="f-g"><label>Email</label><input type="email" placeholder="your@email.com" required/></div>
         </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            src-light="./assets/linkedin_light.png"
-            src-dark="./assets/linkedin_dark.png"
-            alt="My LinkedIn Profile"
-            class="icon"
-            onclick="location.href='https://www.linkedin.com/in/vasanth-m-v2006/'"
-          />
-          <p>
-            <a href="https://www.linkedin.com/in/vasanth-m-v2006/"
-              >Vasanth</a
-            >
-          </p>
-        </div>
-      </div>
-    </section>
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-      <p>Copyright &#169; 2026 Vasanth. All Rights Reserved</p>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+        <div class="f-g"><label>Message</label><textarea placeholder="Tell me about your project..." required></textarea></div>
+        <button type="submit" class="btn-send">Send Message →</button>
+      </form>
+    </div>
+  </section>
+ 
+  <footer>
+    <div class="foot-logo grad">Vasanth</div>
+    <ul class="foot-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <small>© 2026 Vasanth. All Rights Reserved.</small>
+  </footer>
+ 
+  <script>
+    // Nav
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 40));
+ 
+    // Drawer
+    const drawer = document.getElementById('drawer');
+    const brg = document.getElementById('brg');
+    function td() { drawer.classList.toggle('open'); brg.classList.toggle('open'); }
+    function cd() { drawer.classList.remove('open'); brg.classList.remove('open'); }
+ 
+    // Reveal
+    const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }), {threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+ 
+    // Form
+    function sf(e) {
+      e.preventDefault();
+      const b = e.target.querySelector('.btn-send');
+      b.textContent = '✓ Sent!';
+      b.style.background = 'linear-gradient(135deg,#00ffa3,#00cc80)';
+      setTimeout(() => { b.textContent = 'Send Message →'; b.style.background = ''; e.target.reset(); }, 3000);
+    }
+  </script>
+</body>
 </html>

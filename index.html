@@ -342,21 +342,151 @@
     @keyframes up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
     @keyframes scaleIn { from{opacity:0;transform:scale(.93)} to{opacity:1;transform:scale(1)} }
  
-    /* RESPONSIVE */
+    /* ═══ RESPONSIVE ═══ */
+
+    /* Tablet */
     @media(max-width:900px){
-      #profile{grid-template-columns:1fr}
+      #profile{
+        grid-template-columns:1fr;
+        padding-top:120px;
+        min-height:auto;
+        padding-bottom:60px;
+      }
       .hero-img-wrap{display:none}
+      .hero-name{font-size:clamp(52px,10vw,80px)}
+      .hero-role{font-size:16px}
       .about-grid{grid-template-columns:1fr}
-      .about-pic{max-width:240px}
+      .about-pic{max-width:260px; margin:0 auto 32px}
+      .stat-row{grid-template-columns:1fr 1fr}
       .exp-grid{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
+      .proj-grid{grid-template-columns:1fr 1fr}
+      .contact-grid{grid-template-columns:1fr; gap:48px}
       .f-row{grid-template-columns:1fr}
+      .big-title{font-size:clamp(44px,7vw,70px); margin-bottom:40px}
+      footer{flex-wrap:wrap; gap:14px}
     }
+
+    /* Mobile */
     @media(max-width:640px){
+      nav{ padding:16px 5%; }
       .nav-list{display:none}
       .burger{display:flex}
-      section{padding:90px 5%}
-      footer{flex-direction:column;align-items:flex-start}
+      .logo{font-size:18px}
+
+      section{padding:80px 5% 60px}
+
+      /* Aurora — scale down on mobile */
+      .b1{width:300px; height:300px}
+      .b2{width:250px; height:250px}
+      .b3{width:200px; height:200px}
+
+      /* Hero — show image on mobile, centered above text */
+      .hero-img-wrap{
+        display:block;
+        width:160px; height:160px;
+        margin:0 auto 28px;
+        order:-1;
+      }
+      .hero-img-wrap img{
+        width:100%; height:100%;
+        object-fit:cover;
+        border-radius:50%;
+      }
+      .hero-img-wrap::before{
+        border-radius:50%;
+      }
+      .hero-badge{display:none}
+      .img-ph{border-radius:50%; aspect-ratio:1/1}
+      #profile{display:flex; flex-direction:column; align-items:center;}
+      .hero-greeting{font-size:11px; letter-spacing:2px;}
+      .hero-name{
+        font-size:clamp(44px,13vw,64px);
+        letter-spacing:-1px;
+      }
+      .hero-role{font-size:15px;}
+      .hero-desc{
+        font-size:14px;
+        margin:0 auto 30px;
+        text-align:left;
+      }
+      .hero-btns{justify-content:center; gap:12px;}
+      .btn-glow,.btn-ghost{padding:11px 22px; font-size:12px;}
+      .hero-social{justify-content:center; margin-top:28px;}
+      .grid-lines{display:none}
+
+      /* About */
+      .about-pic{max-width:200px}
+      .stat-row{grid-template-columns:1fr 1fr; gap:10px}
+      .stat-card{padding:16px 12px}
+      .stat-card .ic{font-size:18px; margin-bottom:6px}
+      .stat-card h4{font-size:10px}
+      .stat-card p{font-size:12px}
+      .bio{font-size:14px; line-height:1.8}
+
+      /* Tags & titles */
+      .tag{font-size:10px; letter-spacing:2px}
+      .big-title{
+        font-size:clamp(38px,11vw,56px);
+        margin-bottom:32px;
+        letter-spacing:-0.5px;
+      }
+
+      /* Experience */
+      .exp-grid{grid-template-columns:1fr; gap:16px}
+      .exp-card{padding:22px 18px}
+      .exp-head{font-size:17px; margin-bottom:16px; padding-bottom:12px}
+      .sk-row{padding:10px 0}
+      .sk-name{font-size:13px}
+      .pill{font-size:9px; padding:3px 10px}
+
+      /* Projects */
+      .proj-grid{grid-template-columns:1fr}
+      .proj-thumb{min-height:140px}
+      .pnum{font-size:42px}
+      .proj-body{padding:18px}
+      .proj-body h3{font-size:17px}
+      .proj-body p{font-size:13px}
+      .proj-tag-label{font-size:9px}
+      .t-pill{font-size:9px}
+
+      /* Contact */
+      .contact-grid{gap:36px}
+      .contact-left .big-title{font-size:clamp(34px,10vw,50px)}
+      .sub-p{font-size:13px}
+      .c-link{padding:13px 0}
+      .c-icon{width:38px; height:38px; font-size:13px}
+      .c-info span{font-size:9px}
+      .c-info p{font-size:13px}
+      .f-g label{font-size:9px}
+      .f-g input,.f-g textarea{padding:11px 14px; font-size:13px}
+      .btn-send{padding:13px; font-size:12px}
+
+      /* Footer */
+      footer{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:24px 5%;
+        gap:14px;
+      }
+      .foot-logo{font-size:16px}
+      .foot-nav{gap:18px; flex-wrap:wrap}
+      .foot-nav a{font-size:11px}
+      footer small{font-size:11px}
+
+      /* Glass cards */
+      .glass:hover{transform:none}
+
+      /* Drawer links */
+      .drawer a{font-size:34px}
+    }
+
+    /* Small phones */
+    @media(max-width:380px){
+      .hero-name{font-size:38px}
+      .big-title{font-size:34px}
+      .stat-row{grid-template-columns:1fr}
+      .hero-btns{flex-direction:column; align-items:center}
+      .btn-glow,.btn-ghost{width:100%; text-align:center}
     }
   </style>
 </head>
